@@ -1,0 +1,445 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+    <div>
+       
+        
+       <fieldset>
+        <legend>
+          <b>OWNER REGISTRO</b>
+            
+        </legend>
+        <form action="">
+            <label for="hostel">Hostel name:</label><br>
+            <input type="text" name="name" id="hostel" placeholder="Enter hostel name" onclick=""><br>
+            <label for="name">Owner Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Enter your name" onclick=""><br>
+            <label for="contact">Contact numb:</label><br>
+            <input type="tel" id="contact" name="number" placeholder="Enter your number" onclick=""><br>
+            <input type="submit" value="Submit"><br>
+
+            <input type="text" name="number" placeholder="Enter OTP"><br>
+            <label for="password">Passsword:</label><br>
+            <input type="password" id="password" name="email" placeholder="Enter your email" onclick=""><br>
+            <input type="submit" value="Submit"><br>
+            <input type="text" name="number" placeholder="Enter your otp"><br>
+            <label for="file">Proof:</label><br>
+            <input type="file" id="proof" name="file" placeholder="Select file" onclick=""><br>
+
+
+
+        </form>
+       </fieldset>
+       
+        
+       
+    </div>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        fieldset {
+            padding: 15px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            margin-bottom: 5px;
+            padding: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .success {
+            color: green;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend><b>OWNER REGISTRATION</b></legend>
+            <form id="ownerForm">
+                <label for="hostel">Hostel Name:</label>
+                <input type="text" name="hostel" id="hostel" placeholder="Enter hostel name">
+                <span id="hostelError" class="error"></span>
+                
+                <label for="ownerName">Owner Name:</label>
+                <input type="text" id="ownerName" name="ownerName" placeholder="Enter your name">
+                <span id="ownerError" class="error"></span>
+                
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" placeholder="Enter your number">
+                <span id="contactError" class="error"></span>
+                
+                <label for="otp">OTP:</label>
+                <input type="text" name="otp" id="otp" placeholder="Enter OTP">
+                <span id="otpError" class="error"></span>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <span id="passwordError" class="error"></span>
+                
+                <label for="proof">Proof:</label>
+                <input type="file" id="proof" name="proof">
+                <span id="proofError" class="error"></span>
+
+                <input type="button" value="Submit" id="submitBtn">
+            </form>
+        </fieldset>
+    </div>
+
+    <script>
+        // DOM elements
+        const hostelInput = document.getElementById('hostel');
+        const ownerNameInput = document.getElementById('ownerName');
+        const contactInput = document.getElementById('contact');
+        const otpInput = document.getElementById('otp');
+        const passwordInput = document.getElementById('password');
+        const proofInput = document.getElementById('proof');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Error elements
+        const hostelError = document.getElementById('hostelError');
+        const ownerError = document.getElementById('ownerError');
+        const contactError = document.getElementById('contactError');
+        const otpError = document.getElementById('otpError');
+        const passwordError = document.getElementById('passwordError');
+        const proofError = document.getElementById('proofError');
+
+        // Validation functions
+        const validateHostel = () => {
+            if (hostelInput.value.trim() === "") {
+                hostelError.textContent = "Hostel name is required.";
+                return false;
+            }
+            hostelError.textContent = "";
+            return true;
+        };
+
+        const validateOwnerName = () => {
+            if (ownerNameInput.value.trim() === "") {
+                ownerError.textContent = "Owner name is required.";
+                return false;
+            }
+            ownerError.textContent = "";
+            return true;
+        };
+
+        const validateContact = () => {
+            const contactRegex = /^[6-9]\d{9}$/;
+            if (!contactRegex.test(contactInput.value.trim())) {
+                contactError.textContent = "Enter a valid 10-digit number.";
+                return false;
+            }
+            contactError.textContent = "";
+            return true;
+        };
+
+        const validateOTP = () => {
+            const otpRegex = /^\d{6}$/;
+            if (!otpRegex.test(otpInput.value.trim())) {
+                otpError.textContent = "Enter a valid 6-digit OTP.";
+                return false;
+            }
+            otpError.textContent = "";
+            return true;
+        };
+
+        const validatePassword = () => {
+            if (passwordInput.value.trim().length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters long.";
+                return false;
+            }
+            passwordError.textContent = "";
+            return true;
+        };
+
+        const validateProof = () => {
+            if (proofInput.value.trim() === "") {
+                proofError.textContent = "Proof is required.";
+                return false;
+            }
+            proofError.textContent = "";
+            return true;
+        };
+
+        // Event listeners for real-time validation
+        hostelInput.addEventListener('input', validateHostel);
+        ownerNameInput.addEventListener('input', validateOwnerName);
+        contactInput.addEventListener('input', validateContact);
+        otpInput.addEventListener('input', validateOTP);
+        passwordInput.addEventListener('input', validatePassword);
+        proofInput.addEventListener('change', validateProof);
+
+        // Submit button handler
+        submitBtn.addEventListener('click', () => {
+            const isHostelValid = validateHostel();
+            const isOwnerNameValid = validateOwnerName();
+            const isContactValid = validateContact();
+            const isOTPValid = validateOTP();
+            const isPasswordValid = validatePassword();
+            const isProofValid = validateProof();
+
+            if (isHostelValid && isOwnerNameValid && isContactValid && isOTPValid && isPasswordValid && isProofValid) {
+                alert("Form submitted successfully!");
+            } else {
+                alert("Please correct the errors before submitting.");
+            }
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            input {
+                font-size: 0.9em;
+            }
+
+            .btn {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+
+            input {
+                font-size: 0.8em;
+            }
+
+            .btn {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sri Veda Vedha Hostel</h2>
+        <form id="ownerForm">
+            <label for="ownerName">Owner Name:</label>
+            <input type="text" id="ownerName" name="ownerName" placeholder="Enter your name">
+            <span id="ownerError" class="error"></span>
+
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" placeholder="Enter your number"><br>
+            <span id="contactError" class="error"></span>
+            <button type="button" class="btn" id="generateOtpBtn">Generate OTP</button><br>
+
+            <label for="otp">OTP:</label>
+            <input type="text" name="otp" id="otp" placeholder="Enter OTP">
+            <span id="otpError" class="error"></span>
+            
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <span id="passwordError" class="error"></span>
+
+            <label for="confirmPassword">Re-enter Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password">
+            <span id="confirmPasswordError" class="error"></span>
+
+            <label for="proof">Proof:</label>
+            <input type="file" id="proof" name="proof">
+            <span id="proofError" class="error"></span>
+
+            <button type="button" class="btn" id="submitBtn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // DOM Elements
+        const ownerNameInput = document.getElementById('ownerName');
+        const contactInput = document.getElementById('contact');
+        const otpInput = document.getElementById('otp');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const proofInput = document.getElementById('proof');
+        const generateOtpBtn = document.getElementById('generateOtpBtn');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Error Display Elements
+        const ownerError = document.getElementById('ownerError');
+        const contactError = document.getElementById('contactError');
+        const otpError = document.getElementById('otpError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const proofError = document.getElementById('proofError');
+
+        let generatedOtp = ""; // To store the generated OTP
+
+        // Generate a random 6-digit OTP and alert the user
+        generateOtpBtn.addEventListener('click', () => {
+            generatedOtp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate 6-digit OTP
+            alert(`Your OTP is: ${generatedOtp}`);
+        });
+
+        // Validate all fields and display errors
+        const validateForm = () => {
+            let isValid = true;
+
+            // Validate Owner Name
+            if (ownerNameInput.value.trim() === "") {
+                ownerError.textContent = "Owner name is required.";
+                isValid = false;
+            } else {
+                ownerError.textContent = "";
+            }
+
+            // Validate Contact Number
+            const contactRegex = /^[6-9]\d{9}$/;
+            if (!contactRegex.test(contactInput.value.trim())) {
+                contactError.textContent = "Enter a valid 10-digit number.";
+                isValid = false;
+            } else {
+                contactError.textContent = "";
+            }
+
+            // Validate OTP
+            if (otpInput.value.trim() !== generatedOtp) {
+                otpError.textContent = "Invalid OTP. Please enter the correct OTP.";
+                isValid = false;
+            } else {
+                otpError.textContent = "";
+            }
+
+            // Validate Password
+            if (passwordInput.value.trim().length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters long.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // Validate Confirm Password
+            if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
+                confirmPasswordError.textContent = "Passwords do not match.";
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = "";
+            }
+
+            // Validate Proof
+            if (proofInput.files.length === 0) {
+                proofError.textContent = "Please upload proof.";
+                isValid = false;
+            } else {
+                proofError.textContent = "";
+            }
+
+            return isValid;
+        };
+
+        // Handle Submit Button Click
+        submitBtn.addEventListener('click', () => {
+            if (validateForm()) {
+                alert("Form submitted successfully!");
+            } else {
+                alert("Please correct the errors before submitting.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
